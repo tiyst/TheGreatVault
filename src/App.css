@@ -34,6 +34,11 @@ label {
 #gear {
   border: 3px solid aqua;
   max-width: 100vw;
+  padding: 15px 15px;
+}
+
+#gear div {
+  margin-top: 10px;
 }
 
 .FlexRow {

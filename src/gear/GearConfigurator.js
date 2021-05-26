@@ -30,10 +30,10 @@ const pvpMarks = [
 
 const PvpSlider = withStyles({
     root: {
-        // color: "#6f8eff",
         color: "cyan",
         height: 3,
-        padding: "13px 0",
+        // padding: "13px 0",
+        maxWidth: "60vw"
     },
     track: {
         height: 4,
@@ -42,16 +42,18 @@ const PvpSlider = withStyles({
     thumb: {
         height: 20,
         width: 20,
-        backgroundColor: "#fff",
+        backgroundColor: "cyan",
         border: "1px solid currentColor",
         marginTop: -9,
         marginLeft: -11,
-        boxShadow: "#ebebeb 0 2px 2px",
+        boxShadow: "#fff 0 2px 2px",
         "&:focus, &:hover, &$active": {
             boxShadow: "#ccc 0 2px 3px 1px",
         },
-        color: "#fff",
     },
+    markLabel: {
+        color: "white"
+    }
 
 })(Slider);
 
@@ -148,7 +150,6 @@ class GearConfigurator extends Component {
                            onChange={() => this.difficultyChange(mythicDiff)} defaultChecked />
                     <label htmlFor="mythic">Mythic</label>
                 </div>
-                <div>Raid: {this.state.raidKilled} M+: {this.state.mPlus[0]} {this.state.mPlus[1]} {this.state.mPlus[2]} PvP: {this.state.pvpItems}</div>
                 <div className="FlexRow">
                 {bosses}
                 </div>
@@ -166,7 +167,7 @@ class GearConfigurator extends Component {
                         {mp}
                     </select>
                 </div>
-                <div className={"pvpSlider"}>
+                <div className={PvpSlider}>
                     <Typography id="discrete-slider-restrict" gutterBottom>
                         Honor earned
                     </Typography>
@@ -175,11 +176,10 @@ class GearConfigurator extends Component {
                         onChange={this.pvpChange}
                         valueLabelFormat={valueLabelFormat}
                         getAriaValueText={valuetext}
+                        valueLabelDisplay="on"
                         aria-labelledby="discrete-slider-restrict"
                         step={null}
-                        valueLabelDisplay="auto"
                         marks={pvpMarks}
-                        color={"secondary"}
                     />
                 </div>
             </div>

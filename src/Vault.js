@@ -170,15 +170,15 @@ class Vault extends Component {
                 </h5>
                 <button onClick={this.randomizeItems} style={{}}>Randomize</button>
                 <div className="FlexRow">
-                    <h6>Raids: </h6>
+                    {/*<h6>Raids: </h6>*/}
                     {this.state.chosenRaid}
                 </div>
                 <div className="FlexRow">
-                    <h6>Mythic dungeons: </h6>
+                    {/*<h6>Mythic dungeons: </h6>*/}
                     {this.state.chosenMplus}
                 </div>
                 <div className="FlexRow">
-                    <h6>PvP: </h6>
+                    {/*<h6>PvP: </h6>*/}
                     {this.state.chosenPvp}
                 </div>
 
