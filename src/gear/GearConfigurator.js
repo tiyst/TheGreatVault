@@ -1,9 +1,16 @@
-import React, { Component } from "react";
+import React, {Component} from "react";
 import Boss from "./Boss.js"
 import Slider from "@material-ui/core/Slider";
 import Typography from "@material-ui/core/Typography";
 import './GearConfigurator.css'
-import {withStyles} from "@material-ui/core";
+import {
+    FormControlLabel,
+    MenuItem,
+    Radio,
+    RadioGroup,
+    Select,
+    withStyles
+} from "@material-ui/core";
 
 const normalDiff = "Normal"
 const heroicDiff = "Heroic"
@@ -32,7 +39,6 @@ const PvpSlider = withStyles({
     root: {
         color: "cyan",
         height: 3,
-        // padding: "13px 0",
         maxWidth: "60vw"
     },
     track: {
@@ -75,7 +81,7 @@ class GearConfigurator extends Component {
         super(props);
         this.state = {
             raidKilled: 0,
-            mPlus: [-1,-1,-1],
+            mPlus: [-1, -1, -1],
             pvpRating: 0,
             pvpItems: 0
         }
@@ -95,6 +101,8 @@ class GearConfigurator extends Component {
 
     // Vault class callback
     keyChange(index, event) {
+        // TODO when this is called multiple times from same key it adds one more
+        console.log(event)
         let mp = this.state.mPlus
         mp[index] = parseInt(event.target.value)
         console.log(event.target.value)
@@ -109,7 +117,7 @@ class GearConfigurator extends Component {
         let currentRating = this.state.pvpRating
         newValue = parseInt(newValue)
         if (newValue !== currentRating) {
-            this.props.changeNum("pvp", newValue*62.5)
+            this.props.changeNum("pvp", newValue * 62.5)
             this.setState({
                 pvpRating: newValue
             })
@@ -118,6 +126,7 @@ class GearConfigurator extends Component {
 
     // Vault class callback
     difficultyChange(diff) {
+        // console.log(diff.target.value)
         this.props.vaultCallback(diff)
     }
 
@@ -125,49 +134,46 @@ class GearConfigurator extends Component {
         let bosses = [];
         for (let i = 0; i < this.bossNames.length; i++) {
             bosses.push(<Boss
-                            imgPath={(i + 1) + ".png"}
-                            bossName={this.bossNames[i]}
-                            gearCall={this.bossCall}
-                        />)
+                imgPath={(i + 1) + ".png"}
+                bossName={this.bossNames[i]}
+                gearCall={this.bossCall}
+            />)
         }
 
         let mp = [];
-        mp.push(<option value="-1">None</option>)
+        mp.push(<MenuItem value="-1"><em>None</em></MenuItem>)
         for (let i = 2; i <= 15; i++) {
-            mp.push(<option value={i}>{i}</option>)
+            mp.push(<MenuItem value={i}>{i}</MenuItem>)
         }
 
         return (
             <div id="gear">
-                <div>
-                    <input type="radio" name="diff" value="normal" id="normal"
-                           onChange={() => this.difficultyChange(normalDiff)} />
-                    <label htmlFor="normal">Normal</label>
-                    <input type="radio" name="diff" value="heroic" id="heroic"
-                           onChange={() => this.difficultyChange(heroicDiff)} />
-                    <label htmlFor="heroic">Heroic</label>
-                    <input type="radio" name="diff" value="mythic" id="mythic"
-                           onChange={() => this.difficultyChange(mythicDiff)} defaultChecked />
-                    <label htmlFor="mythic">Mythic</label>
+                <div className="FlexRow">
+                    <RadioGroup row defaultValue={"Mythic"} onChange={event => this.difficultyChange(event.target.value)}>
+                        {/*//TODO make classes styles for this*/}
+                        <FormControlLabel value="Normal" control={<Radio />} label="Normal" />
+                        <FormControlLabel value="Heroic" control={<Radio />} label="Heroic" />
+                        <FormControlLabel value="Mythic" control={<Radio />} label="Mythic" />
+                    </RadioGroup>
                 </div>
                 <div className="FlexRow">
-                {bosses}
+                    {bosses}
                 </div>
                 <div>
                     Key 1:
-                    <select value={this.state.mPlus[0]} onChange={(e) => this.keyChange(0, e)}>
+                    <Select defaultValue={-1} onChange={(e) => this.keyChange(0, e)}>
                         {mp}
-                    </select>
+                    </Select>
                     Key 2:
-                    <select value={this.state.mPlus[1]} onChange={(e) => this.keyChange(1, e)}>
+                    <Select defaultValue={-1} onChange={(e) => this.keyChange(0, e)}>
                         {mp}
-                    </select>
+                    </Select>
                     Key 3:
-                    <select value={this.state.mPlus[2]} onChange={(e) => this.keyChange(2, e)}>
+                    <Select defaultValue={-1} onChange={(e) => this.keyChange(0, e)}>
                         {mp}
-                    </select>
+                    </Select>
                 </div>
-                <div className={PvpSlider}>
+                <div>
                     <Typography id="discrete-slider-restrict" gutterBottom>
                         Honor earned
                     </Typography>
