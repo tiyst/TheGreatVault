@@ -35,6 +35,37 @@ const pvpMarks = [
     },
 ];
 
+const MythicSelect = withStyles({
+    root: {
+        borderBottom: '1px solid white',
+        minWidth: "50px",
+        color: "white"
+    },
+    select: {
+        '&:before': {
+            borderColor: "white",
+        },
+        '&:after': {
+            borderColor: "white",
+        }
+    },
+    icon: {
+        fill: "white",
+    },
+
+})(Select);
+
+const DifficultyRadio = withStyles({
+    root: {
+        color: "white",
+        '&$checked': { // What is this magic
+            color: "cyan",
+        },
+    },
+    checked: {}
+
+})(Radio)
+
 const PvpSlider = withStyles({
     root: {
         color: "cyan",
@@ -126,7 +157,6 @@ class GearConfigurator extends Component {
 
     // Vault class callback
     difficultyChange(diff) {
-        // console.log(diff.target.value)
         this.props.vaultCallback(diff)
     }
 
@@ -149,11 +179,11 @@ class GearConfigurator extends Component {
         return (
             <div id="gear">
                 <div className="FlexRow">
-                    <RadioGroup row defaultValue={"Mythic"} onChange={event => this.difficultyChange(event.target.value)}>
-                        {/*//TODO make classes styles for this*/}
-                        <FormControlLabel value="Normal" control={<Radio />} label="Normal" />
-                        <FormControlLabel value="Heroic" control={<Radio />} label="Heroic" />
-                        <FormControlLabel value="Mythic" control={<Radio />} label="Mythic" />
+                    <RadioGroup row defaultValue={"Mythic"}
+                                onChange={event => this.difficultyChange(event.target.value)}>
+                        <FormControlLabel value={normalDiff} control={<DifficultyRadio/>} label={normalDiff}/>
+                        <FormControlLabel value={heroicDiff} control={<DifficultyRadio/>} label={heroicDiff}/>
+                        <FormControlLabel value={mythicDiff} control={<DifficultyRadio/>} label={mythicDiff}/>
                     </RadioGroup>
                 </div>
                 <div className="FlexRow">
@@ -161,17 +191,17 @@ class GearConfigurator extends Component {
                 </div>
                 <div>
                     Key 1:
-                    <Select defaultValue={-1} onChange={(e) => this.keyChange(0, e)}>
+                    <MythicSelect defaultValue={-1} onChange={(e) => this.keyChange(0, e)}>
                         {mp}
-                    </Select>
+                    </MythicSelect>
                     Key 2:
-                    <Select defaultValue={-1} onChange={(e) => this.keyChange(0, e)}>
+                    <MythicSelect defaultValue={-1} onChange={(e) => this.keyChange(0, e)}>
                         {mp}
-                    </Select>
+                    </MythicSelect>
                     Key 3:
-                    <Select defaultValue={-1} onChange={(e) => this.keyChange(0, e)}>
+                    <MythicSelect defaultValue={-1} onChange={(e) => this.keyChange(0, e)}>
                         {mp}
-                    </Select>
+                    </MythicSelect>
                 </div>
                 <div>
                     <Typography id="discrete-slider-restrict" gutterBottom>
