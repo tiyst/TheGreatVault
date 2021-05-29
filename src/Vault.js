@@ -114,15 +114,14 @@ class Vault extends Component {
 
     changeNum(type, num) {
         let newKeys; //FIXME I don't like this that much
+        if (type === itemTypeMplus) {
+            newKeys = num;
+        }
         for (let i = 0; i < 3; i++) {
             if (type === itemTypeRaid) {
                 this.state.itemRefs[i].current.setActive(this.state.raidNum + num >= raidSteps[i]);
             }
             if (type === itemTypeMplus) {
-                let index = num.split("-")[0];
-                let value = num.split("-")[1];
-                newKeys = this.state.mythicKeys;
-                newKeys[index] = value;
                 this.state.itemRefs[3 + i].current.setActive(newKeys[i] !== 0);
             }
             if (type === itemTypePvp) {

@@ -112,7 +112,7 @@ class GearConfigurator extends Component {
         super(props);
         this.state = {
             raidKilled: 0,
-            mPlus: [-1, -1, -1],
+            mPlus: [0, 0, 0],
             pvpRating: 0,
             pvpItems: 0
         }
@@ -133,9 +133,17 @@ class GearConfigurator extends Component {
     // Vault class callback
     keyChange(index, event) {
         let mp = this.state.mPlus;
-        mp[index] = parseInt(event.target.value);
-        let query = index + "-" + event.target.value;
-        this.props.changeNum("mplus", query);
+        let value = parseInt(event.target.value);
+        if (value === 0) { //nulling mythics ahead
+            for (let i = 2; i > 0; i--) {
+                if (index === i) {
+                    break;
+                }
+                mp[i] = 0;
+            }
+        }
+        mp[index] = value;
+        this.props.changeNum("mplus", mp);
         this.setState({
             mPlus: mp
         });
@@ -189,15 +197,15 @@ class GearConfigurator extends Component {
                 </div>
                 <div>
                     Key 1:
-                    <MythicSelect defaultValue={0} onChange={(e) => this.keyChange(0, e)}>
+                    <MythicSelect value={this.state.mPlus[0]} onChange={(e) => this.keyChange(0, e)}>
                         {mp}
                     </MythicSelect>
                     Key 2:
-                    <MythicSelect defaultValue={0} onChange={(e) => this.keyChange(1, e)}>
+                    <MythicSelect disabled={this.state.mPlus[0] === 0} value={this.state.mPlus[1]} onChange={(e) => this.keyChange(1, e)}>
                         {mp}
                     </MythicSelect>
                     Key 3:
-                    <MythicSelect defaultValue={0} onChange={(e) => this.keyChange(2, e)}>
+                    <MythicSelect disabled={this.state.mPlus[1] === 0} value={this.state.mPlus[2]} onChange={(e) => this.keyChange(2, e)}>
                         {mp}
                     </MythicSelect>
                 </div>
