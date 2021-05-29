@@ -54,7 +54,7 @@ class Item extends Component {
 
     componentDidUpdate(prevProps, prevState, snapshot) {
         //Disgusting hack to refresh links with just generated data
-        console.log(window.$WowheadPower.refreshLinks())
+        window.$WowheadPower.refreshLinks();
     }
 
     changeData(id, name, ilvl) {
