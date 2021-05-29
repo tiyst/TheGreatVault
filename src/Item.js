@@ -30,7 +30,7 @@ class Item extends Component {
             chosen: false,
             itemID: this.props.ID,
             itemName: this.props.name,
-            ilvl: 226 //TODO implement ilvl
+            ilvl: 1
         }
 
         this.handleOnClick = this.handleOnClick.bind(this);
@@ -62,8 +62,8 @@ class Item extends Component {
         this.setState({
             itemID: id,
             itemName: name,
-            generated: isGenerated
-            //TODO ilvl impl
+            generated: isGenerated,
+            ilvl: ilvl
         });
         this.scriptLoaded();
     }

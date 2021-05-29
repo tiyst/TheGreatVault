@@ -13,6 +13,12 @@ const raidSteps = [3, 6, 9]
 const mplusSteps = [1, 2, 3]
 const pvpSteps = [1250, 2500, 6250]
 
+const raidIlvls = {
+    "Normal": 200,
+    "Heroic": 213,
+    "Mythic": 226
+}
+
 const mPlusIlvls = {
     0: -1,
     1: -1,
@@ -102,18 +108,22 @@ class Vault extends Component {
     randomizeItems() {
         console.log("Generating vault")
         let itemID = -1;
+        let ilvl = 226;
         for (let i = 0; i < 3; i++) {
             // Raid items
             itemID = (this.state.itemRefs[i].current.state.activated) ? this.randomKey(this.state.raid) : -1;
-            this.state.itemRefs[i].current.changeData(itemID, this.state.raid[itemID])
+            ilvl = raidIlvls[this.state.raidDifficulty];
+            this.state.itemRefs[i].current.changeData(itemID, this.state.raid[itemID], ilvl)
 
             // Mythic+ Items
             itemID = (this.state.itemRefs[3 + i].current.state.activated) ? this.randomKey(this.state.mplus) : -1;
-            this.state.itemRefs[3 + i].current.changeData(itemID, this.state.mplus[itemID])
+            ilvl = mPlusIlvls[this.state.mythicKeys[i]];
+            this.state.itemRefs[3 + i].current.changeData(itemID, this.state.mplus[itemID], ilvl)
 
             //PvP items
             itemID = (this.state.itemRefs[6 + i].current.state.activated) ? this.randomKey(this.state.mplus) : -1;
-            this.state.itemRefs[6 + i].current.changeData(itemID, this.state.pvp[itemID])
+            ilvl = 226; // TODO implement pvp rating
+            this.state.itemRefs[6 + i].current.changeData(itemID, this.state.pvp[itemID], ilvl)
         }
     }
 
