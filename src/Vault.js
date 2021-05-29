@@ -121,7 +121,7 @@ class Vault extends Component {
             this.state.itemRefs[3 + i].current.changeData(itemID, this.state.mplus[itemID], ilvl)
 
             //PvP items
-            itemID = (this.state.itemRefs[6 + i].current.state.activated) ? this.randomKey(this.state.mplus) : -1;
+            itemID = (this.state.itemRefs[6 + i].current.state.activated) ? this.randomKey(this.state.pvp) : -1;
             ilvl = 226; // TODO implement pvp rating
             this.state.itemRefs[6 + i].current.changeData(itemID, this.state.pvp[itemID], ilvl)
         }
