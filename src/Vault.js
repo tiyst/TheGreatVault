@@ -3,6 +3,7 @@ import Item from './Item'
 
 import {Ring} from 'react-awesome-spinners'
 import GearConfigurator from "./gear/GearConfigurator";
+import {Button, withStyles} from "@material-ui/core";
 
 const itemTypeRaid = "raid"
 const itemTypeMplus = "mplus"
@@ -30,6 +31,16 @@ const mPlusIlvls = {
     14: 226,
     15: 226,
 }
+
+const RandomButton = withStyles({
+    root: {
+        background: "cyan",
+        color: "black",
+        '&hover': {
+            background: 'white',
+        },
+    }
+})(Button);
 
 // const pvpSteps = [1400, 1600, 1800, 2100, 2400]
 
@@ -172,7 +183,9 @@ class Vault extends Component {
                     M+: {keys[0]} {keys[1]} {keys[2]}
                     PvP: {this.state.pvpNum}
                 </h5>
-                <button onClick={this.randomizeItems} style={{}}>Randomize</button>
+                <RandomButton variant="contained" size="large" onClick={this.randomizeItems}>
+                    Randomize Items
+                </RandomButton>
                 <div className="FlexRow">
                     {/*<h6>Raids: </h6>*/}
                     {this.state.chosenRaid}

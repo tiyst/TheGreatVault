@@ -105,7 +105,7 @@ class Item extends Component {
 
         let clr = this.state.activated ? "cyan" : "grey";
         let content = this.state.generated ?
-            <a href={"https://www.wowhead.com/item=" + this.state.ID}
+            <a href={"https://www.wowhead.com/item=" + this.state.itemID}
                data-wowhead={"item=" + this.state.itemID + "&ilvl=" + this.state.ilvl}
                target="_blank" rel="noreferrer">
                 {this.state.name} - ilvl: {this.state.ilvl}
