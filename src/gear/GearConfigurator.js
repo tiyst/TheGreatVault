@@ -132,15 +132,13 @@ class GearConfigurator extends Component {
 
     // Vault class callback
     keyChange(index, event) {
-        // TODO when this is called multiple times from same key it adds one more
-        console.log(event)
-        let mp = this.state.mPlus
-        mp[index] = parseInt(event.target.value)
-        console.log(event.target.value)
-        this.props.changeNum("mplus", parseInt(event.target.value) === -1 ? -1 : 1)
+        let mp = this.state.mPlus;
+        mp[index] = parseInt(event.target.value);
+        let query = index + "-" + event.target.value;
+        this.props.changeNum("mplus", query);
         this.setState({
             mPlus: mp
-        })
+        });
     }
 
     // Vault class callback
@@ -171,7 +169,7 @@ class GearConfigurator extends Component {
         }
 
         let mp = [];
-        mp.push(<MenuItem value="-1"><em>None</em></MenuItem>)
+        mp.push(<MenuItem value="0"><em>None</em></MenuItem>)
         for (let i = 2; i <= 15; i++) {
             mp.push(<MenuItem value={i}>{i}</MenuItem>)
         }
@@ -191,15 +189,15 @@ class GearConfigurator extends Component {
                 </div>
                 <div>
                     Key 1:
-                    <MythicSelect defaultValue={-1} onChange={(e) => this.keyChange(0, e)}>
+                    <MythicSelect defaultValue={0} onChange={(e) => this.keyChange(0, e)}>
                         {mp}
                     </MythicSelect>
                     Key 2:
-                    <MythicSelect defaultValue={-1} onChange={(e) => this.keyChange(0, e)}>
+                    <MythicSelect defaultValue={0} onChange={(e) => this.keyChange(1, e)}>
                         {mp}
                     </MythicSelect>
                     Key 3:
-                    <MythicSelect defaultValue={-1} onChange={(e) => this.keyChange(0, e)}>
+                    <MythicSelect defaultValue={0} onChange={(e) => this.keyChange(2, e)}>
                         {mp}
                     </MythicSelect>
                 </div>
