@@ -110,7 +110,7 @@ class Item extends Component {
                target="_blank" rel="noreferrer">
                 {this.state.name} - ilvl: {this.state.ilvl}
             </a> :
-            <h5>{parse(itemDesc[this.props.type], steps[this.props.type][this.props.order])}</h5>
+            <a>{parse(itemDesc[this.props.type], steps[this.props.type][this.props.order])}</a>
 
         return (
             <div className="Item" style={{borderColor: clr}} onClick={this.handleOnClick}>

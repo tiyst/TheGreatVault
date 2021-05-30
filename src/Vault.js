@@ -10,7 +10,6 @@ const itemTypeMplus = "mplus"
 const itemTypePvp = "pvp"
 
 const raidSteps = [3, 6, 9]
-const mplusSteps = [1, 2, 3]
 const pvpSteps = [1250, 2500, 6250]
 
 const raidIlvls = {
@@ -45,6 +44,7 @@ const RandomButton = withStyles({
         '&hover': {
             background: 'white',
         },
+        margin: "10px"
     }
 })(Button);
 
@@ -189,9 +189,15 @@ class Vault extends Component {
             <div>
                 <h5><i>The Great Vault <br/>Get disappointed any time, not just on reset days</i></h5>
                 <h5>
-                    Bosses killed: ({this.state.raidDifficulty}) {this.state.raidNum}
-                    M+: {keys[0]} {keys[1]} {keys[2]}
-                    PvP: {this.state.pvpNum}
+                    <div>
+                        Bosses killed: <i>({this.state.raidDifficulty}) {this.state.raidNum}</i>
+                    </div>
+                    <div>
+                        M+: 1st key: <i>{keys[0]}</i> 4th key: <i>{keys[1]}</i> 10th key: <i>{keys[2]}</i>
+                    </div>
+                    <div>
+                        Honor Earned: <i>{this.state.pvpNum}</i>
+                    </div>
                 </h5>
                 <RandomButton variant="contained" size="large" onClick={this.randomizeItems}>
                     Randomize Items

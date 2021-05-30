@@ -46,8 +46,8 @@ class Boss extends Component {
             )
         }
 
-        let bg = this.state.active ? "cyan" : "grey";
-        return <div className="BossDiv unselectable" style={{backgroundColor: bg}} onClick={this.handleOnClick}>
+        let clr = this.state.active ? "cyan" : "lightgrey";
+        return <div className="BossDiv unselectable" style={{borderColor: clr}} onClick={this.handleOnClick}>
             <img src={this.state.img} alt=""/>
             <div>{this.props.bossName}</div>
         </div>

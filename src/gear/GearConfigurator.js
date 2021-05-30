@@ -39,7 +39,8 @@ const MythicSelect = withStyles({
     root: {
         borderBottom: '1px solid white',
         minWidth: "50px",
-        color: "white"
+        color: "white",
+        margin: "0 10px"
     },
     select: {
         '&:before': {
@@ -47,11 +48,16 @@ const MythicSelect = withStyles({
         },
         '&:after': {
             borderColor: "white",
-        }
+        },
     },
     icon: {
         fill: "white",
     },
+    disabled: {
+        borderColor: "gray",
+        color: "gray",
+        fill: "gray"
+    }
 
 })(Select);
 
@@ -195,19 +201,25 @@ class GearConfigurator extends Component {
                 <div className="FlexRow">
                     {bosses}
                 </div>
-                <div>
-                    Key 1:
-                    <MythicSelect value={this.state.mPlus[0]} onChange={(e) => this.keyChange(0, e)}>
-                        {mp}
-                    </MythicSelect>
-                    Key 2:
-                    <MythicSelect disabled={this.state.mPlus[0] === 0} value={this.state.mPlus[1]} onChange={(e) => this.keyChange(1, e)}>
-                        {mp}
-                    </MythicSelect>
-                    Key 3:
-                    <MythicSelect disabled={this.state.mPlus[1] === 0} value={this.state.mPlus[2]} onChange={(e) => this.keyChange(2, e)}>
-                        {mp}
-                    </MythicSelect>
+                <div className="FlexRow">
+                    <div>
+                        <Typography>Key 1:</Typography>
+                        <MythicSelect value={this.state.mPlus[0]} onChange={(e) => this.keyChange(0, e)}>
+                            {mp}
+                        </MythicSelect>
+                    </div>
+                    <div>
+                        <Typography>Key 2:</Typography>
+                        <MythicSelect disabled={this.state.mPlus[0] === 0} value={this.state.mPlus[1]} onChange={(e) => this.keyChange(1, e)}>
+                            {mp}
+                        </MythicSelect>
+                    </div>
+                    <div>
+                        <Typography>Key 3:</Typography>
+                        <MythicSelect disabled={this.state.mPlus[1] === 0} value={this.state.mPlus[2]} onChange={(e) => this.keyChange(2, e)}>
+                            {mp}
+                        </MythicSelect>
+                    </div>
                 </div>
                 <div>
                     <Typography id="discrete-slider-restrict" gutterBottom>

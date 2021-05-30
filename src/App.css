@@ -1,16 +1,4 @@
 
-:root {
-  --white: #ffffff;
-  --light: #f0eff3;
-  --black: #000000;
-  --dark-blue: #1f2029;
-  --dark-light: #353746;
-  --red: #da2c4d;
-  --yellow: #f8ab37;
-  --grey: #ecedf3;
-}
-
-
 .App {
   text-align: center;
 }
@@ -20,7 +8,6 @@
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  /*align-items: center;*/
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
@@ -32,9 +19,8 @@ label {
 }
 
 #gear {
-  border: 3px solid aqua;
   max-width: 100vw;
-  padding: 15px 15px;
+  padding: 0 15px;
 }
 
 #gear div {
@@ -72,7 +58,6 @@ label {
 }
 
 .Item a {
-  border: 3px solid green;
   margin: 10px;
   user-select: none;
   font-family: Roboto;
@@ -98,10 +83,11 @@ label {
   min-height: 3vw;
   max-width: 7.5vw;
   min-width: 150px;
-  border: 6px inset darkmagenta;
+  border: 6px solid;
   border-radius: 20px;
   margin: 2vh 0.2% 0.5%;
   position: relative;
+  background-color: #282c34;
 }
 
 .BossDiv img {  
