@@ -110,9 +110,12 @@ function valueLabelFormat(value) {
 
 class GearConfigurator extends Component {
 
-    bossNames = ["Shriekwing", "Huntsman Altimore", "Hungering Destroyer", "Artificer Xy'mox",
-        "Sun King's Salvation", "Lady Inerva Darkvein", "The Council of Blood", "Sludgefist",
-        "Stone Legion Generals", "Sire Denathrius"];
+    // bossNames = ["Shriekwing", "Huntsman Altimore", "Hungering Destroyer", "Artificer Xy'mox",
+    //     "Sun King's Salvation", "Lady Inerva Darkvein", "The Council of Blood", "Sludgefist",
+    //     "Stone Legion Generals", "Sire Denathrius"];
+    bossNames = ["Tarragrue", "Eye of the Jailer", "The Nine", "Remnant of Ner'zhul",
+        "Soulrender Dormazain", "Painsmith Raznal", "Guardian of the First Ones", "Fatescribe Roh-Kalo",
+        "Kel'Thuzad", "Sylvanas Windrunner"];
 
     constructor(props) {
         super(props);

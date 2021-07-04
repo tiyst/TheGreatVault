@@ -13,28 +13,28 @@ const raidSteps = [3, 6, 9]
 const pvpSteps = [1250, 2500, 6250]
 
 const raidIlvls = {
-    "Normal": 200,
-    "Heroic": 213,
-    "Mythic": 226
+    "Normal": 226,
+    "Heroic": 239,
+    "Mythic": 252
 }
 
 const mPlusIlvls = {
     0: -1,
     1: -1,
-    2: 200,
-    3: 203,
-    4: 207,
-    5: 210,
-    6: 210,
-    7: 213,
-    8: 216,
-    9: 216,
-    10: 220,
-    11: 220,
-    12: 223,
-    13: 223,
-    14: 226,
-    15: 226,
+    2: 226,
+    3: 226,
+    4: 226,
+    5: 229,
+    6: 229,
+    7: 233,
+    8: 236,
+    9: 236,
+    10: 239,
+    11: 242,
+    12: 246,
+    13: 246,
+    14: 249,
+    15: 252,
 }
 
 const RandomButton = withStyles({
@@ -122,7 +122,7 @@ class Vault extends Component {
 
             //PvP items
             itemID = (this.state.itemRefs[6 + i].current.state.activated) ? this.randomKey(this.state.pvp) : -1;
-            ilvl = 226; // TODO implement pvp rating
+            ilvl = 252; // TODO implement pvp rating
             this.state.itemRefs[6 + i].current.changeData(itemID, this.state.pvp[itemID], ilvl)
         }
     }

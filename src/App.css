@@ -63,6 +63,10 @@ label {
   font-family: Roboto;
 }
 
+h5 {
+  font-family: Roboto;
+}
+
 .Item img {
   display: block;
   max-width: 30%;
