@@ -11,6 +11,7 @@ import {
     Select,
     withStyles
 } from "@material-ui/core";
+import PvpRank from "./PvpRank";
 
 const normalDiff = "Normal"
 const heroicDiff = "Heroic"
@@ -116,19 +117,22 @@ class GearConfigurator extends Component {
     bossNames = ["Tarragrue", "Eye of the Jailer", "The Nine", "Remnant of Ner'zhul",
         "Soulrender Dormazain", "Painsmith Raznal", "Guardian of the First Ones", "Fatescribe Roh-Kalo",
         "Kel'Thuzad", "Sylvanas Windrunner"];
+    pvpRankNames = ["Unranked", "Combatant", "Challenger", "Rival", "Duelist", "Elite"];
 
     constructor(props) {
         super(props);
         this.state = {
             raidKilled: 0,
             mPlus: [0, 0, 0],
-            pvpRating: 0,
-            pvpItems: 0
+            pvpHonorEarned: 0,
+            pvpItems: 0,
+            pvpRankIndex: 4
         }
 
         this.bossCall = this.bossCall.bind(this);
         this.keyChange = this.keyChange.bind(this);
         this.pvpChange = this.pvpChange.bind(this);
+        this.pvpRankChange = this.pvpRankChange.bind(this);
     }
 
     // Boss class callback
@@ -160,14 +164,22 @@ class GearConfigurator extends Component {
 
     // Vault class callback
     pvpChange(event, newValue) {
-        let currentRating = this.state.pvpRating
+        let currentRating = this.state.pvpHonorEarned
         newValue = parseInt(newValue)
         if (newValue !== currentRating) {
             this.props.changeNum("pvp", newValue * 62.5)
             this.setState({
-                pvpRating: newValue
+                pvpHonorEarned: newValue
             })
         }
+    }
+
+    // Vault class callback
+    pvpRankChange(rankIndex) {
+        this.setState({
+            pvpRankIndex: rankIndex
+        });
+        this.props.changePvpRank(rankIndex);
     }
 
     // Vault class callback
@@ -176,6 +188,7 @@ class GearConfigurator extends Component {
     }
 
     render() {
+        //Prepare raid bosses buttons
         let bosses = [];
         for (let i = 0; i < this.bossNames.length; i++) {
             bosses.push(<Boss
@@ -185,10 +198,23 @@ class GearConfigurator extends Component {
             />)
         }
 
+        //Prepare mythic keys dropdowns
         let mp = [];
         mp.push(<MenuItem value="0"><em>None</em></MenuItem>)
         for (let i = 2; i <= 15; i++) {
             mp.push(<MenuItem value={i}>{i}</MenuItem>)
+        }
+
+        //Prepare PvP rank buttons
+        let pvpRanks = [];
+        for (let i = 0; i < 5; i++) {
+            pvpRanks.push(<PvpRank
+                imgPath={(i+1) + ".png"}
+                rankName={this.pvpRankNames[i]}
+                rankIndex={i}
+                rankCallback={this.pvpRankChange}
+                active = {(this.state.pvpRankIndex) === i}
+            />)
         }
 
         return (
@@ -238,6 +264,9 @@ class GearConfigurator extends Component {
                         step={null}
                         marks={pvpMarks}
                     />
+                    <div className="FlexRow">
+                        {pvpRanks}
+                    </div>
                 </div>
             </div>
         )

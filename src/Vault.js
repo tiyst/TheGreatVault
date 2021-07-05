@@ -37,6 +37,14 @@ const mPlusIlvls = {
     15: 252,
 }
 
+const pvpIlvls = {
+    0: 220,
+    1:226,
+    2:233,
+    3:240,
+    4:246
+}
+
 const RandomButton = withStyles({
     root: {
         background: "cyan",
@@ -47,8 +55,6 @@ const RandomButton = withStyles({
         margin: "10px"
     }
 })(Button);
-
-// const pvpSteps = [1400, 1600, 1800, 2100, 2400]
 
 class Vault extends Component {
 
@@ -72,12 +78,14 @@ class Vault extends Component {
             raidDifficulty: "Mythic",
             raidNum: 0,
             mythicKeys: [0,0,0],
-            pvpNum: 0
+            pvpNum: 0,
+            pvpRankIndex: 4
         }
 
         this.changeNum = this.changeNum.bind(this);
         this.gearCallback = this.gearCallback.bind(this);
         this.randomizeItems = this.randomizeItems.bind(this);
+        this.pvpRankCallback = this.pvpRankCallback.bind(this);
     }
 
     async componentDidMount() {
@@ -122,7 +130,8 @@ class Vault extends Component {
 
             //PvP items
             itemID = (this.state.itemRefs[6 + i].current.state.activated) ? this.randomKey(this.state.pvp) : -1;
-            ilvl = 252; // TODO implement pvp rating
+            // ilvl = 252;
+            ilvl = pvpIlvls[this.state.pvpRankIndex];
             this.state.itemRefs[6 + i].current.changeData(itemID, this.state.pvp[itemID], ilvl)
         }
     }
@@ -130,6 +139,16 @@ class Vault extends Component {
     gearCallback(diff) {
         this.setState({
             raidDifficulty: diff
+        })
+    }
+
+    pvpRankCallback(pvpIndex) {
+        if (pvpIndex < 0 || 5 < pvpIndex) {
+            console.error("Wrong pvp rank index.");
+            throw new Error("Wrong pvp rank index.")
+        }
+        this.setState({
+            pvpRankIndex: pvpIndex
         })
     }
 
@@ -215,7 +234,11 @@ class Vault extends Component {
                     {this.state.chosenPvp}
                 </div>
 
-                <GearConfigurator vaultCallback={this.gearCallback} changeNum={this.changeNum}/>
+                <GearConfigurator
+                    vaultCallback={this.gearCallback}
+                    changeNum={this.changeNum}
+                    changePvpRank={this.pvpRankCallback}
+                />
             </div>
         );
     }
