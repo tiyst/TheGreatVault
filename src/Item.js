@@ -2,8 +2,8 @@ import {Component} from "react";
 import {Ring} from "react-awesome-spinners";
 
 const itemDesc = {
-    "raid":"Defeat %s Castle Nathria raid bosses",
-    "mplus":"Complete %s Mythic Keystone Dungeon",
+    "raid":"Defeat %s Sanctum of Domination Raid Bosses",
+    "mplus":"Complete %s Mythic+ Dungeon",
     "pvp":"Earn %s Honor from Rated PvP"
 }
 
